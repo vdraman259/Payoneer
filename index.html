@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raman Namboodiripad — Portfolio</title>
+  <style>
+    :root{
+      --bg:#efedeb;--text:#1d2733;--muted:#5d6670;--line:rgba(29,39,51,0.08);--max:1120px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+    .topbar{padding:22px 0 8px}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-size:.95rem;letter-spacing:.02em;font-weight:600}
+    .nav{display:flex;gap:18px;font-size:.92rem;color:var(--muted)}
+    .hero{padding:34px 0 30px}
+    .intro{max-width:620px;margin-bottom:34px}
+    .intro h1{
+      margin:0;font-size:clamp(2.6rem,6vw,4.3rem);line-height:.96;letter-spacing:-.06em;font-weight:500;
+    }
+    .intro p{margin:10px 0 0;color:var(--muted);font-size:1rem;max-width:52ch}
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 22px}
+    .tile{display:block}
+    .thumb{
+      aspect-ratio:1/1;overflow:hidden;background:#ddd;border:1px solid rgba(0,0,0,.03);
+      transition:transform 180ms ease;
+    }
+    .tile:hover .thumb{transform:translateY(-2px)}
+    .tile-copy{padding-top:10px}
+    .tile-copy h3{margin:0;font-size:clamp(1.1rem,1.8vw,1.7rem);line-height:1.08;letter-spacing:-.04em;font-weight:500}
+    .tile-copy p{margin:8px 0 0;color:var(--muted);font-size:.94rem;line-height:1.5;max-width:28ch}
+    .brands{padding:6px 0 18px}
+    .brands-strip{
+      display:grid;grid-template-columns:.8fr 2.2fr;gap:18px;align-items:start;padding-top:12px;border-top:1px solid var(--line)
+    }
+    .brands-copy h2{margin:0;font-size:clamp(1.3rem,2.8vw,2rem);line-height:1;letter-spacing:-.05em;font-weight:500}
+    .brands-copy p{margin:8px 0 0;color:var(--muted);max-width:24ch;font-size:.94rem}
+    .brands-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .brand-pill{
+      padding:16px 18px;background:rgba(255,255,255,.28);border:1px solid var(--line);color:var(--text);
+      font-size:1rem;letter-spacing:-.03em;min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center
+    }
+    .section{padding:54px 0 24px}
+    .section-head{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:20px}
+    .section-head h2{margin:0;font-size:clamp(1.8rem,3.8vw,2.8rem);line-height:.96;letter-spacing:-.05em;font-weight:500}
+    .section-head p{margin:0;max-width:34ch;color:var(--muted)}
+    .cases{display:grid;gap:18px}
+    .case{background:rgba(255,255,255,.34);border:1px solid var(--line);padding:28px}
+    .case-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;align-items:start}
+    .case-visual{aspect-ratio:1/1;overflow:hidden;background:#ddd}
+    .case-copy h3{margin:0;font-size:clamp(1.8rem,4vw,2.6rem);line-height:.95;letter-spacing:-.05em;font-weight:500}
+    .case-copy p,.meta-copy,.footnote,.mini p{color:var(--muted)}
+    .meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 18px}
+    .pill{padding:8px 12px;background:rgba(29,39,51,.05);border:1px solid rgba(29,39,51,.07);border-radius:999px;font-size:.88rem}
+    .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+    .mini{padding:18px;background:rgba(255,255,255,.3);border:1px solid var(--line)}
+    .mini h4{margin:0 0 8px;font-size:1rem}
+    .about-strip{display:grid;grid-template-columns:1.2fr repeat(3,.6fr);gap:0;border-top:1px solid var(--line);margin-top:26px}
+    .about-main,.stat{padding:26px 18px 12px 0}
+    .stat{padding-left:28px;border-left:1px solid var(--line)}
+    .about-main h2{margin:0 0 8px;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.05em;font-weight:500}
+    .stat strong{display:block;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.06em;font-weight:500;margin-bottom:4px}
+    .footer{padding:46px 0 60px;color:var(--muted);font-size:.92rem}
+    @media (max-width:960px){
+      .gallery,.case-grid,.cols,.about-strip,.brands-strip{grid-template-columns:1fr 1fr}
+      .brands-list{grid-template-columns:1fr 1fr}
+      .about-main{grid-column:1/-1;padding-right:0}
+    }
+    @media (max-width:680px){
+      .wrap{width:min(var(--max),calc(100% - 24px))}
+      .topbar-inner,.section-head{flex-direction:column;align-items:start}
+      .gallery,.case-grid,.cols,.about-strip,.brands-strip,.brands-list{grid-template-columns:1fr}
+      .nav{gap:12px;flex-wrap:wrap}
+      .stat{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">RN.</div>
+      <nav class="nav">
+        <a href="#work">Work</a>
+        <a href="#case-studies">Case studies</a>
+        <a href="#about">About</a>
+        <a href="mailto:raman.namboodiripad@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <div class="intro">
+        <h1>Hi, I'm Raman</h1>
+        <p>AI content strategist focused on the rules behind better content — system prompts, evaluation frameworks, content infrastructure, product collaboration, and growth-minded storytelling.</p>
+      </div>
+      <section id="work" class="gallery" aria-label="Selected work">
+        <a class="tile" href="#axiom"><div class="thumb"><img src="assets/axiom_ai.png" alt="Prompt systems cover image" /></div><div class="tile-copy"><h3>Prompt systems</h3><p>System prompts, workflow logic, and AI-assisted content infrastructure designed to improve draft quality and speed.</p></div></a>
+        <a class="tile" href="#onboarding"><div class="thumb"><img src="assets/onboarding_system.png" alt="Content infrastructure cover image" /></div><div class="tile-copy"><h3>Content infrastructure</h3><p>Back-end onboarding, decision logic, and scalable lifecycle systems across 8+ products.</p></div></a>
+        <a class="tile" href="#apac"><div class="thumb"><img src="assets/apac_strategy.png" alt="Regional strategy cover image" /></div><div class="tile-copy"><h3>Regional strategy</h3><p>ICP-led segmentation, regional alignment, and growth-minded content planning across APAC.</p></div></a>
+        <a class="tile" href="#growth"><div class="thumb"><img src="assets/seo_growth.png" alt="Growth and discoverability cover image" /></div><div class="tile-copy"><h3>Growth &amp; discoverability</h3><p>SEO, iteration, and content performance signals tied to traffic, reach, and discoverability.</p></div></a>
+        <a class="tile" href="#stories"><div class="thumb"><img src="assets/content_systems.png" alt="Voice and quality cover image" /></div><div class="tile-copy"><h3>Voice &amp; quality</h3><p>Voice, tone, governance, and evaluation thinking that make content more consistent and on-brand.</p></div></a>
+        <a class="tile" href="#stories"><div class="thumb"><img src="assets/product_stories.png" alt="Product and format storytelling cover image" /></div><div class="tile-copy"><h3>Product &amp; format storytelling</h3><p>Product-org storytelling, short-form content, and consumer-tech work that connects content to audience attention.</p></div></a>
+      </section>
+    </section>
+    <section class="brands wrap" aria-label="Brands I've worked with">
+      <div class="brands-strip">
+        <div class="brands-copy">
+          <h2>Brands I've worked with</h2>
+          <p>Experience across AI content systems, product storytelling, lifecycle infrastructure, and growth.</p>
+        </div>
+        <div class="brands-list">
+          <div class="brand-pill">Avalara</div>
+          <div class="brand-pill">Soroco</div>
+          <div class="brand-pill">Meesho</div>
+          <div class="brand-pill">Wipro</div>
+        </div>
+      </div>
+    </section>
+    <section id="case-studies" class="section wrap">
+      <div class="section-head">
+        <h2>Selected case studies</h2>
+        <p>Built to match an AI Content Strategist role: prompt logic, evaluation frameworks, back-end content systems, product and UX collaboration, regional strategy, and discoverability.</p>
+      </div>
+      <div class="cases">
+        <article id="axiom" class="case"><div class="case-grid"><div class="case-visual"><img src="assets/axiom_ai.png" alt="System prompts and AI content workflow visual" /></div><div class="case-copy"><h3>System prompts &amp; AI content workflow</h3><div class="meta"><span class="pill">System prompts</span><span class="pill">Workflow logic</span><span class="pill">ICP inputs</span><span class="pill">APAC GTM</span></div><p>I co-built a proprietary AI content workflow for APAC revenue marketing. This is my closest match to a role that needs someone to write the rules behind AI-generated content — system prompts, theme-identification logic, structured inputs, and workflow design that improved first-draft quality.</p><div class="cols"><div class="mini"><h4>Problem</h4><p>The team needed faster content creation without sacrificing relevance, structure, or quality.</p></div><div class="mini"><h4>What I did</h4><p>Worked on prompt structure, role-based workflow logic, and the editorial baseline that made AI outputs more usable, more on-brand, and easier to review.</p></div></div></div></div></article>
+        <article id="onboarding" class="case"><div class="case-grid"><div class="case-visual"><img src="assets/onboarding_system.png" alt="Back-end content infrastructure visual" /></div><div class="case-copy"><h3>Back-end content infrastructure</h3><div class="meta"><span class="pill">Lifecycle</span><span class="pill">Decision trees</span><span class="pill">Content ops</span><span class="pill">Cross-functional</span></div><p>I led the redesign and centralization of onboarding content across 8+ Avalara products, building one clearer source of truth for welcome journeys, decision logic, ownership, and reusable content infrastructure that teams could actually maintain.</p><div class="cols"><div class="mini"><h4>Problem</h4><p>Onboarding content lived across too many teams, docs, and tools.</p></div><div class="mini"><h4>What I did</h4><p>Built a structured hub, aligned PM, UX writing, editorial, legal, and ops stakeholders, and defined the logic, rules, and ownership behind the journey.</p></div></div></div></div></article>
+        <article id="apac" class="case"><div class="case-grid"><div class="case-visual"><img src="assets/apac_strategy.png" alt="Regional strategy and growth planning visual" /></div><div class="case-copy"><h3>Regional strategy &amp; growth planning</h3><div class="meta"><span class="pill">ICP</span><span class="pill">Segmentation</span><span class="pill">Messaging</span><span class="pill">Regional GTM</span></div><p>I authored an integrated APAC content and messaging strategy built around ICP clarity, regional segmentation, and awareness-to-adoption planning across key markets. This is the work that best shows annual strategy thinking, regional alignment, and growth-focused content planning.</p><div class="cols"><div class="mini"><h4>Problem</h4><p>APAC needed sharper audience definition instead of one broad content approach.</p></div><div class="mini"><h4>What I did</h4><p>Defined ICPs, regional storylines, and a clearer framework for campaigns, briefs, enablement, and performance-oriented planning across markets.</p></div></div></div></div></article>
+        <article id="growth" class="case"><div class="case-grid"><div class="case-visual"><img src="assets/seo_growth.png" alt="Growth and discoverability visual" /></div><div class="case-copy"><h3>Growth, discoverability &amp; iteration</h3><div class="meta"><span class="pill">SEO</span><span class="pill">Organic growth</span><span class="pill">LinkedIn</span><span class="pill">Performance</span></div><p>Across Soroco and Meesho, I worked on visibility problems through SEO, social content, and product-adjacent storytelling — from ranking #1 for “process mining” to scaling reach, followers, and content performance signals.</p><div class="cols"><div class="mini"><h4>Problem</h4><p>Strong stories were not always discoverable or consistently told.</p></div><div class="mini"><h4>What I did</h4><p>Built search-focused content, social systems, and clearer story frameworks tied to discoverability, iteration, and measurable reach.</p></div></div></div></div></article>
+        <article id="stories" class="case"><div class="case-grid"><div class="case-visual"><img src="assets/product_stories.png" alt="Voice quality and product storytelling visual" /></div><div class="case-copy"><h3>Voice, quality &amp; product storytelling</h3><div class="meta"><span class="pill">Voice &amp; tone</span><span class="pill">Governance</span><span class="pill">Product org</span><span class="pill">Short-form video</span></div><p>I like working where content meets structure — voice systems, editorial standards, evaluation thinking, product storytelling, and reusable frameworks that make quality easier to scale.</p><div class="cols"><div class="mini"><h4>How I work</h4><p>Cross-functionally with product, UX writing, legal, editorial, operations, marketing, and product-adjacent teams that care about clarity.</p></div><div class="mini"><h4>Why it matters</h4><p>Good content gets stronger when the system behind it is easier to understand, maintain, and tune for tone, quality, and consistency.</p></div></div></div></div></article>
+      </div>
+    </section>
+    <section id="about" class="section wrap">
+      <div class="about-strip">
+        <div class="about-main">
+          <h2>Hey, I’m Raman.</h2>
+          <p class="meta-copy">Equal parts developer and content strategist. I like building the systems behind clear content — prompts, journeys, frameworks, and the rules that make quality easier to scale.</p>
+        </div>
+        <div class="stat"><strong>8+</strong><span class="footnote">Years across content, growth, and lifecycle work.</span></div>
+        <div class="stat"><strong>3</strong><span class="footnote">Core lanes: AI systems, lifecycle, and growth.</span></div>
+        <div class="stat"><strong>∞</strong><span class="footnote">Curiosity for better structure, clearer messaging, and cleaner workflows.</span></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer wrap">
+    <span>Built with systems, words, and the remains of several chaotic review cycles.</span>
+  </footer>
+</body>
+</html>
